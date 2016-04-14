@@ -10,9 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -20,7 +22,10 @@ import org.hibernate.validator.constraints.NotBlank;
  *
  * @author Felipe
  */
+@Entity
+@Table(name = "foto")
 public class Foto extends Midia implements Serializable{
+    
     @EmbeddedId
     private FotoID fotoId;
     @NotBlank(message = "A legenda deve ser informada!")
@@ -32,12 +37,13 @@ public class Foto extends Midia implements Serializable{
     @Column(name = "legenda", length = 500, nullable = false)
     private String endereco;
     @ManyToMany
-    @JoinTable(name = "galerias_fotos", 
+    @JoinTable(name = "galeria_fotos", 
                     joinColumns = 
-                    @JoinColumn(name = "foto", referencedColumnName = "id"),
+                    @JoinColumn(name = "foto", referencedColumnName = "numero"),
                     inverseJoinColumns = 
                     @JoinColumn(name = "galeria", referencedColumnName = "id"))
     private List<Galeria> galerias = new ArrayList<>();
+    
     
     public Foto() {
         

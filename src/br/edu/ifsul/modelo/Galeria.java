@@ -55,7 +55,7 @@ public class Galeria implements Serializable {
                     joinColumns = 
                     @JoinColumn(name = "galeria", referencedColumnName = "id"),
                     inverseJoinColumns = 
-                    @JoinColumn(name = "foto", referencedColumnName = "id"))
+                    @JoinColumn(name = "foto", referencedColumnName = "numero"))
     private List<Foto> fotos = new ArrayList<>();
     
     public Galeria() {
@@ -122,6 +122,14 @@ public class Galeria implements Serializable {
     @Override
     public String toString() {
         return this.titulo;
+    }
+
+    public Pessoa getPessoa() {
+        return pessoa;
+    }
+
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
     }
     
     

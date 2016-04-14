@@ -125,4 +125,8 @@ public class Pessoa extends Usuario implements Serializable{
         return this.nome;
     }
 
+    public List<Pessoa> getAmigos() {
+        return amigos;
+    }
+
 }

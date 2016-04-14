@@ -5,8 +5,9 @@
     <class>br.edu.ifsul.modelo.Comentario</class>
     <class>br.edu.ifsul.modelo.Galeria</class>
     <class>br.edu.ifsul.modelo.Midia</class>
-    <class>br.edu.ifsul.modelo.Pessoa</class>
     <class>br.edu.ifsul.modelo.Postagem</class>
+    <class>br.edu.ifsul.modelo.Foto</class>
+    <class>br.edu.ifsul.modelo.Pessoa</class>
     <class>br.edu.ifsul.modelo.Usuario</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/trabalhoTA"/>
