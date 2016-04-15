@@ -5,13 +5,8 @@
  */
 package br.edu.ifsul.testes;
 
-import br.edu.ifsul.modelo.Comentario;
-import br.edu.ifsul.modelo.Pessoa;
 import br.edu.ifsul.modelo.Video;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -49,22 +44,21 @@ public class TestePersistirVideoJUnit {
     public void teste() {
         boolean exception = false;
         try {
-            
-            Comentario c = em.find(Comentario.class, 1);
-            List<Comentario> comentarios = new ArrayList<>();
-            comentarios.add(c);
+//            Comentario c = em.find(Comentario.class, 1);
+//            List<Comentario> comentarios = new ArrayList<>();
+//            comentarios.add(c);
             Calendar publicacao = Calendar.getInstance();
             Video v = new Video();
             v.setLink("https://www.youtube.com/watch?v=8rmBvkMrjAY");
             v.setPublicacao(publicacao);
-            v.setTitulo("Best 100 Goals In Football History" );
+            v.setTitulo("Best 100 Goals In Football History");
             v.setPublico(true);
             v.setQuantidadeVisualizacoes(15000);
-            v.setComentarios(comentarios);
-           c.setVideo(v);
-             em.getTransaction().begin();
+//            v.setComentarios(comentarios);
+//            c.setVideo(v);
+            em.getTransaction().begin();
             em.persist(v);
-            em.persist(c);
+//            em.persist(c);
             em.getTransaction().commit();
         } catch (Exception e) {
             System.out.println("Erro: " + e);

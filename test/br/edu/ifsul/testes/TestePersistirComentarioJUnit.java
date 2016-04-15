@@ -50,7 +50,7 @@ public class TestePersistirComentarioJUnit {
         boolean exception = false;
         try {
             Comentario c = new Comentario();
-            Video v = em.find(Video.class, 2);
+            Video v = em.find(Video.class, 1);
             Pessoa p = em.find(Pessoa.class, 1);
             Calendar publicacao = Calendar.getInstance();
             c.setPublicacao(publicacao);

@@ -51,14 +51,8 @@ public class Galeria implements Serializable {
     @ManyToOne
     @JoinColumn(name = "pessoa", nullable = false, referencedColumnName = "id")
     private Pessoa pessoa;
-    @ManyToMany
-    @JoinTable(name = "galeria_fotos", 
-                    joinColumns = 
-                    @JoinColumn(name = "galeria", referencedColumnName = "id"),
-                    inverseJoinColumns = 
-		   { @JoinColumn(name = "fotoId.numero", referencedColumnName = "numero",nullable = true),
-		     @JoinColumn(name = "fotoId.galeria", referencedColumnName = "galeria", nullable = true) }
-	     )
+    @OneToMany(mappedBy = "fotoId.galeria", cascade = CascadeType.ALL, orphanRemoval = true,
+            fetch = FetchType.LAZY)
     private List<Foto> fotos = new ArrayList<>();
 
     public Galeria() {

@@ -46,7 +46,7 @@ public class Foto implements Serializable {
     @NotNull(message = "A quantidade de visualizações deve ser informada!")
     @Column(name = "quantidade_visualizacoes", nullable = false)
     @Min(message = "A quantidade de visualizações não pode ser negativa!", value = 0)
-    private Double quantidadeVisualizacoes;
+    private Integer quantidadeVisualizacoes;
     @NotNull(message = "A data de publicação deve ser informada...")
     @Column(name = "publicacao", nullable = false)
     @Temporal(TemporalType.DATE)
@@ -60,10 +60,10 @@ public class Foto implements Serializable {
     @JoinTable(name = "galeria_fotos",
             joinColumns
             = {
-                @JoinColumn(name = "fotoId.numero", referencedColumnName = "numero", nullable = false),
-                @JoinColumn(name = "fotoId.galeria", referencedColumnName = "galeria", nullable = false)},
+                @JoinColumn(name = "fotoId.numero", referencedColumnName = "numero", nullable = true),
+                @JoinColumn(name = "fotoId.galeria", referencedColumnName = "galeria", nullable = true)},
             inverseJoinColumns
-            = @JoinColumn(name = "galeria", referencedColumnName = "id")
+            = @JoinColumn(name = "galeria", referencedColumnName = "id", nullable = true)
     )
     private List<Galeria> galerias = new ArrayList<>();
     @OneToMany(mappedBy = "foto", cascade = CascadeType.ALL, orphanRemoval = true,
@@ -98,11 +98,11 @@ public class Foto implements Serializable {
         this.publico = publico;
     }
 
-    public Double getQuantidadeVisualizacoes() {
+    public Integer getQuantidadeVisualizacoes() {
         return quantidadeVisualizacoes;
     }
 
-    public void setQuantidadeVisualizacoes(Double quantidadeVisualizacoes) {
+    public void setQuantidadeVisualizacoes(Integer quantidadeVisualizacoes) {
         this.quantidadeVisualizacoes = quantidadeVisualizacoes;
     }
 
