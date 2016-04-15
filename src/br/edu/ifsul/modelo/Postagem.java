@@ -34,7 +34,8 @@ import org.hibernate.validator.constraints.NotBlank;
  */
 @Entity
 @Table(name = "postagem")
-public class Postagem implements Serializable{
+public class Postagem implements Serializable {
+
     @Id
     @SequenceGenerator(name = "seq_postagem", sequenceName = "seq_postagem_id", allocationSize = 1)
     @GeneratedValue(generator = "seq_postagem", strategy = GenerationType.SEQUENCE)
@@ -57,9 +58,19 @@ public class Postagem implements Serializable{
     @ManyToOne
     @JoinColumn(name = "pessoa", nullable = false, referencedColumnName = "id")
     private Pessoa pessoa;
-    @OneToMany(mappedBy = "comentario", cascade = CascadeType.ALL, orphanRemoval = true,
+    @ManyToOne
+    @JoinColumn(name = "foto", referencedColumnName = "titulo", nullable = true)
+    private Foto foto;
+    @ManyToOne
+    @JoinColumn(name = "video", nullable = true, referencedColumnName = "id")
+    private Video video;
+    @OneToMany(mappedBy = "postagem", cascade = CascadeType.ALL, orphanRemoval = true,
             fetch = FetchType.LAZY)
     private List<Comentario> comentarios = new ArrayList<>();
+
+    public Postagem() {
+
+    }
 
     public Integer getId() {
         return id;
@@ -109,6 +120,22 @@ public class Postagem implements Serializable{
         this.pessoa = pessoa;
     }
 
+    public Video getVideo() {
+        return video;
+    }
+
+    public void setVideo(Video video) {
+        this.video = video;
+    }
+
+    public Foto getFoto() {
+        return foto;
+    }
+
+    public void setFoto(Foto foto) {
+        this.foto = foto;
+    }
+
     public List<Comentario> getComentarios() {
         return comentarios;
     }
@@ -119,8 +146,8 @@ public class Postagem implements Serializable{
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 37 * hash + Objects.hashCode(this.id);
+        int hash = 5;
+        hash = 31 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -144,7 +171,7 @@ public class Postagem implements Serializable{
 
     @Override
     public String toString() {
-        return this.titulo;
+        return this.conteudo;
     }
-    
+
 }

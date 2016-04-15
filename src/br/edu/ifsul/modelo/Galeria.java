@@ -34,6 +34,7 @@ import org.hibernate.validator.constraints.NotBlank;
 @Entity
 @Table(name = "galeria")
 public class Galeria implements Serializable {
+
     @Id
     @SequenceGenerator(name = "seq_galeria", sequenceName = "seq_galeria_id", allocationSize = 1)
     @GeneratedValue(generator = "seq_galeria", strategy = GenerationType.SEQUENCE)
@@ -55,11 +56,13 @@ public class Galeria implements Serializable {
                     joinColumns = 
                     @JoinColumn(name = "galeria", referencedColumnName = "id"),
                     inverseJoinColumns = 
-                    @JoinColumn(name = "foto", referencedColumnName = "numero"))
+		   { @JoinColumn(name = "fotoId.numero", referencedColumnName = "numero",nullable = true),
+		     @JoinColumn(name = "fotoId.galeria", referencedColumnName = "galeria", nullable = true) }
+	     )
     private List<Foto> fotos = new ArrayList<>();
-    
+
     public Galeria() {
-        
+
     }
 
     public Integer getId() {
@@ -86,14 +89,22 @@ public class Galeria implements Serializable {
         this.descricao = descricao;
     }
 
-    public List<Foto> getFotos() {
+    public Pessoa getPessoa() {
+        return pessoa;
+    }
+
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
+    }
+
+    public List<Foto> getListaFotos() {
         return fotos;
     }
 
-    public void setFotos(List<Foto> fotos) {
+    public void setListaFotos(List<Foto> fotos) {
         this.fotos = fotos;
     }
-    
+
     @Override
     public int hashCode() {
         int hash = 3;
@@ -124,13 +135,4 @@ public class Galeria implements Serializable {
         return this.titulo;
     }
 
-    public Pessoa getPessoa() {
-        return pessoa;
-    }
-
-    public void setPessoa(Pessoa pessoa) {
-        this.pessoa = pessoa;
-    }
-    
-    
 }

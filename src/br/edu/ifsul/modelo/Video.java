@@ -5,7 +5,6 @@
  */
 package br.edu.ifsul.modelo;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -17,10 +16,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -36,13 +31,12 @@ import org.hibernate.validator.constraints.NotBlank;
  * @author Felipe
  */
 @Entity
-@Table(name = "midia")
-//Classe abstrata que fornece herança
-@Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Midia implements Serializable{
+@Table(name = "video")
+public class Video {
+
     @Id
-    @SequenceGenerator(name = "seq_midia", sequenceName = "seq_midia_id", allocationSize = 1)
-    @GeneratedValue(generator = "seq_midia", strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = "seq_video", sequenceName = "seq_video_id", allocationSize = 1)
+    @GeneratedValue(generator = "seq_video", strategy = GenerationType.SEQUENCE)
     private Integer id;
     @NotBlank(message = "O título deve ser informado!")
     @Length(max = 50, message = "O título não deve ter mais que {max} caracteres...")
@@ -53,21 +47,21 @@ public abstract class Midia implements Serializable{
     @NotNull(message = "A quantidade de visualizações deve ser informada!")
     @Column(name = "quantidade_visualizacoes", nullable = false)
     @Min(message = "A quantidade de visualizações não pode ser negativa!", value = 0)
-    private Double quantidadeVisualizacoes;
+    private Integer quantidadeVisualizacoes;
     @NotNull(message = "A data de publicação deve ser informada...")
     @Column(name = "publicacao", nullable = false)
     @Temporal(TemporalType.DATE)
     private Calendar publicacao;
-    @NotNull(message = "A postagem deve ser informada")
-    @ManyToOne
-    @JoinColumn(name = "postagem", nullable = false, referencedColumnName = "id")
-    private Postagem postagem;
-      @OneToMany(mappedBy = "comentario", cascade = CascadeType.ALL, orphanRemoval = true,
+    @NotBlank(message = "O link deve ser informado!")
+    @Length(max = 500, message = "O link não deve ter mais que {max} caracteres...")
+    @Column(name = "link", length = 500, nullable = false)
+    private String link;
+    @OneToMany(mappedBy = "video", cascade = CascadeType.ALL, orphanRemoval = true,
             fetch = FetchType.LAZY)
     private List<Comentario> comentarios = new ArrayList<>();
-    
-    public Midia() {
-        
+
+    public Video() {
+
     }
 
     public Integer getId() {
@@ -76,14 +70,6 @@ public abstract class Midia implements Serializable{
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Calendar getPublicacao() {
-        return publicacao;
-    }
-
-    public void setPublicacao(Calendar publicacao) {
-        this.publicacao = publicacao;
     }
 
     public String getTitulo() {
@@ -102,18 +88,42 @@ public abstract class Midia implements Serializable{
         this.publico = publico;
     }
 
-    public Double getQuantidadeVisualizacoes() {
+    public Integer getQuantidadeVisualizacoes() {
         return quantidadeVisualizacoes;
     }
 
-    public void setQuantidadeVisualizacoes(Double quantidadeVisualizacoes) {
+    public void setQuantidadeVisualizacoes(Integer quantidadeVisualizacoes) {
         this.quantidadeVisualizacoes = quantidadeVisualizacoes;
+    }
+
+    public Calendar getPublicacao() {
+        return publicacao;
+    }
+
+    public void setPublicacao(Calendar publicacao) {
+        this.publicacao = publicacao;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
+    
+    public List<Comentario> getComentarios() {
+        return comentarios;
+    }
+
+    public void setComentarios(List<Comentario> comentarios) {
+        this.comentarios = comentarios;
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 71 * hash + Objects.hashCode(this.id);
+        hash = 17 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -128,34 +138,10 @@ public abstract class Midia implements Serializable{
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Midia other = (Midia) obj;
+        final Video other = (Video) obj;
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
         return true;
     }
-
-    @Override
-    public String toString() {
-        return this.titulo;
-    }
-
-    public Postagem getPostagem() {
-        return postagem;
-    }
-
-    public void setPostagem(Postagem postagem) {
-        this.postagem = postagem;
-    }
-
-    public List<Comentario> getComentarios() {
-        return comentarios;
-    }
-
-    public void setComentarios(List<Comentario> comentarios) {
-        this.comentarios = comentarios;
-    }
-    
-    
-    
 }

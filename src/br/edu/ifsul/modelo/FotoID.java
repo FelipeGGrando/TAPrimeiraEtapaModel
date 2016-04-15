@@ -11,26 +11,43 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
 /**
  *
  * @author Felipe
-*/
+ */
 @Embeddable
-public class FotoID implements Serializable{
-    
+public class FotoID implements Serializable {
+
     @NotNull(message = "O número deve ser informado")
     @Column(name = "numero", nullable = false)
     private Integer numero;
-    @NotNull(message = "A foto deve ser informada")
-    @ManyToOne
-    @JoinColumn(name = "foto", nullable = false, referencedColumnName = "id")
-    private Foto foto;
     @NotNull(message = "A galeria deve ser informada")
     @ManyToOne
-    @JoinColumn(name = "galeria", nullable = false, referencedColumnName = "id")
+    @JoinColumn(name = "galeria", nullable = true, referencedColumnName = "id")
     private Galeria galeria;
+  
+    public FotoID() {
+
+    }
+
+    public Integer getNumero() {
+        return numero;
+    }
+
+    public void setNumero(Integer numero) {
+        this.numero = numero;
+    }
+
+    public Galeria getGaleria() {
+        return galeria;
+    }
+
+    public void setGaleria(Galeria galeria) {
+        this.galeria = galeria;
+    }
 
     @Override
     public int hashCode() {
@@ -56,34 +73,10 @@ public class FotoID implements Serializable{
         }
         return true;
     }
-    
-    public FotoID() {
-        
+
+    @Override
+    public String toString() {
+        return this.numero.toString();
     }
 
-    
-    public Integer getNumero() {
-        return numero;
-    }
-
-    public void setNumero(Integer numero) {
-        this.numero = numero;
-    }
-
-    public Foto getFoto() {
-        return foto;
-    }
-
-    public void setFoto(Foto foto) {
-        this.foto = foto;
-    }
-
-    public Galeria getGaleria() {
-        return galeria;
-    }
-
-    public void setGaleria(Galeria galeria) {
-        this.galeria = galeria;
-    }
-    
 }

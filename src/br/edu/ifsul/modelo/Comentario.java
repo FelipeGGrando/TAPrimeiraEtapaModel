@@ -42,13 +42,19 @@ public class Comentario implements Serializable{
     @Column(name = "publicacao", nullable = false)
     @Temporal(TemporalType.DATE)
     private Calendar publicacao;
-    @NotNull(message = "A pessoa deve ser informada")
+     @NotNull(message = "A pessoa deve ser informada")
     @ManyToOne
     @JoinColumn(name = "pessoa", nullable = false, referencedColumnName = "id")
     private Pessoa pessoa;
     @ManyToOne
-    @JoinColumn(name = "midia", nullable = false, referencedColumnName = "id")
-    private Midia midia;
+    @JoinColumn(name = "foto_id", referencedColumnName = "titulo", nullable = true)    
+    private Foto foto;
+    @ManyToOne
+    @JoinColumn(name = "video_id", referencedColumnName = "id", nullable = true)    
+    private Video video;
+    @ManyToOne
+    @JoinColumn(name = "postagem_id", referencedColumnName = "id", nullable = true)    
+    private Postagem postagem;
     
     public Comentario() {
         
@@ -77,23 +83,31 @@ public class Comentario implements Serializable{
     public void setPublicacao(Calendar publicacao) {
         this.publicacao = publicacao;
     }
-
-    public Pessoa getPessoa() {
-        return pessoa;
+    
+    public Foto getFoto() {
+        return foto;
     }
 
-    public void setPessoa(Pessoa pessoa) {
-        this.pessoa = pessoa;
+    public void setFoto(Foto foto) {
+        this.foto = foto;
     }
 
-    public Midia getMidia() {
-        return midia;
+    public Video getVideo() {
+        return video;
     }
 
-    public void setMidia(Midia midia) {
-        this.midia = midia;
+    public void setVideo(Video video) {
+        this.video = video;
     }
 
+    public Postagem getPostagem() {
+        return postagem;
+    }
+
+    public void setPostagem(Postagem postagem) {
+        this.postagem = postagem;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 7;
@@ -122,7 +136,13 @@ public class Comentario implements Serializable{
     @Override
     public String toString() {
         return this.conteudo;
+    }     
+
+    public Pessoa getPessoa() {
+        return pessoa;
     }
-    
-    
+
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
+    }
 }

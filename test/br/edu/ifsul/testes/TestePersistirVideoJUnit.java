@@ -4,7 +4,10 @@
  * and open the template in the editor.
  */
 package br.edu.ifsul.testes;
+
+import br.edu.ifsul.modelo.Comentario;
 import br.edu.ifsul.modelo.Pessoa;
+import br.edu.ifsul.modelo.Video;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -21,49 +24,41 @@ import org.junit.Test;
  *
  * @author Felipe
  */
-public class TestePersistirPessoaJUnit {
-    
+public class TestePersistirVideoJUnit {
+
     EntityManagerFactory emf;
     EntityManager em;
-    
-    public TestePersistirPessoaJUnit() {
-        
+
+    public TestePersistirVideoJUnit() {
+
     }
-    
+
     @Before
     public void setUp() {
         emf = Persistence.createEntityManagerFactory("TAPrimeiraEtapaModelPU");
-        em = emf.createEntityManager();           
+        em = emf.createEntityManager();
     }
-    
+
     @After
     public void tearDown() {
         em.close();
         emf.close();
     }
-    
+
     @Test
     public void teste() {
         boolean exception = false;
         try {
-//            Pessoa amigo = em.find(Pessoa.class, 1);
-//            List<Pessoa> amigos = new ArrayList<>();
-//            amigos.add(amigo);
-            Calendar c = Calendar.getInstance();
-            Pessoa p = new Pessoa();
-            p.setLogin("FelipeGGrando");
-            p.setSenha("123456");
-            p.setAtivo(true);
-            p.setUltimoLogin(c);
-            p.setNome("Felipe Gasparin Grando");
-            p.setDescricao("Cara muito legal e tal...");
-            p.setCidade("Passo Fundo");
-            p.setNascimento(new GregorianCalendar(1994, Calendar.MARCH, 26));
-            p.setPeso(63.00);
-            p.setAltura(1.64);
-//            p.setAmigos(amigos);
+
+            Calendar publicacao = Calendar.getInstance();
+            Pessoa p = em.find(Pessoa.class, 1);
+            Comentario c = new Comentario();
+            c.setPessoa(p);
+            c.setConteudo("Muito legal esse vídeo cara!");
+            c.setPublicacao(publicacao);
+
             em.getTransaction().begin();
-            em.persist(p);
+            em.persist(c);
             em.getTransaction().commit();
         } catch (Exception e) {
             System.out.println("Erro: " + e);

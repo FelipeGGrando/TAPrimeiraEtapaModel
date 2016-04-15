@@ -13,6 +13,10 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -20,6 +24,8 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -55,8 +61,10 @@ public class Pessoa extends Usuario implements Serializable{
     @Min(value = 0, message = "A altura não pode ser negativa!")
     @Column(name = "altura", nullable = false, columnDefinition = "numeric(5,2)")
     private Double altura;
-    @OneToMany(mappedBy = "pessoa", cascade = CascadeType.ALL, orphanRemoval = true,
-            fetch = FetchType.LAZY)
+    @JoinTable(name = "pessoas_amigos", joinColumns = {
+    @JoinColumn(name = "pessoa_id", referencedColumnName = "id", nullable = true)}, inverseJoinColumns = {
+    @JoinColumn(name = "amigo_id", referencedColumnName = "id", nullable = true)})
+    @ManyToMany
     private List<Pessoa> amigos = new ArrayList<>();
     
     public Pessoa() {
@@ -110,23 +118,23 @@ public class Pessoa extends Usuario implements Serializable{
     public void setAltura(Double altura) {
         this.altura = altura;
     }
+
+    public List<Pessoa> getAmigos() {
+        return amigos;
+    }
+
+    public void setAmigos(List<Pessoa> amigos) {
+        this.amigos = amigos;
+    }
+
+
+
     
     //EQUALS E HASH CODE ESTÂO NO USUÀRIO
 
     /**
      * @param amigos the amigos to set
      */
-    public void setAmigos(List<Pessoa> amigos) {
-        this.amigos = amigos;
-    }
-
-    @Override
-    public String toString() {
-        return this.nome;
-    }
-
-    public List<Pessoa> getAmigos() {
-        return amigos;
-    }
+    
 
 }
