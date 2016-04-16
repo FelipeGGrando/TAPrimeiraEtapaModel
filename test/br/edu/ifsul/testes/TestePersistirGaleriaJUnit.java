@@ -5,10 +5,14 @@
  */
 package br.edu.ifsul.testes;
 
-import br.edu.ifsul.modelo.Comentario;
+import br.edu.ifsul.modelo.Foto;
+import br.edu.ifsul.modelo.FotoID;
+import br.edu.ifsul.modelo.Galeria;
 import br.edu.ifsul.modelo.Pessoa;
 import br.edu.ifsul.modelo.Video;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -21,12 +25,12 @@ import org.junit.Test;
  *
  * @author Felipe
  */
-public class TestePersistirComentarioJUnit {
+public class TestePersistirGaleriaJUnit {
     
     EntityManagerFactory emf;
     EntityManager em;
     
-    public TestePersistirComentarioJUnit() {
+    public TestePersistirGaleriaJUnit() {
         
     }
     
@@ -46,16 +50,15 @@ public class TestePersistirComentarioJUnit {
     public void teste() {
         boolean exception = false;
         try {
-            Comentario c = new Comentario();
-            Video v = em.find(Video.class, 1);
-            Pessoa p = em.find(Pessoa.class, 1);
-            Calendar publicacao = Calendar.getInstance();
-            c.setPublicacao(publicacao);
-            c.setPessoa(p);
-            c.setConteudo("Muito legal esse vídeo cara!");
-            c.setVideo(v);
+            Galeria g = new Galeria();
+//            List<Foto> fotos = new ArrayList<>();
+//            fotos.add(em.find(Foto.class, 1));
+            g.setPessoa(em.find(Pessoa.class, 1));
+            g.setDescricao("Galeria de fotos sobre futebol 2016");
+            g.setTitulo("Futebol 2016");
+//            g.setListaFotos(fotos);
             em.getTransaction().begin();
-            em.persist(c);
+            em.persist(g);
             em.getTransaction().commit();
         } catch (Exception e) {
             System.out.println("Erro: " + e);

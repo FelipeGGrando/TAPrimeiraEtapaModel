@@ -9,10 +9,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,7 +18,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -51,8 +48,14 @@ public class Galeria implements Serializable {
     @ManyToOne
     @JoinColumn(name = "pessoa", nullable = false, referencedColumnName = "id")
     private Pessoa pessoa;
-    @OneToMany(mappedBy = "fotoId.galeria", cascade = CascadeType.ALL, orphanRemoval = true,
-            fetch = FetchType.LAZY)
+     @ManyToMany
+    @JoinTable(name = "galeria_fotos", 
+                    joinColumns = 
+                    @JoinColumn(name = "galeria", referencedColumnName = "id"),
+                    inverseJoinColumns = 
+		   { @JoinColumn(name = "foto_numero", referencedColumnName = "numero", nullable = true),
+		     @JoinColumn(name = "foto_galeria", referencedColumnName = "galeria", nullable = true) }
+	     )
     private List<Foto> fotos = new ArrayList<>();
 
     public Galeria() {
@@ -127,6 +130,14 @@ public class Galeria implements Serializable {
     @Override
     public String toString() {
         return this.titulo;
+    }
+
+    public List<Foto> getFotos() {
+        return fotos;
+    }
+
+    public void setFotos(List<Foto> fotos) {
+        this.fotos = fotos;
     }
 
 }

@@ -6,9 +6,10 @@
 package br.edu.ifsul.testes;
 import br.edu.ifsul.modelo.Foto;
 import br.edu.ifsul.modelo.FotoID;
-import br.edu.ifsul.modelo.Pessoa;
-import br.edu.ifsul.modelo.Video;
+import br.edu.ifsul.modelo.Galeria;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -47,16 +48,16 @@ public class TestePersistirFotoJUnit {
         boolean exception = false;
         try {
             Calendar publicacao = Calendar.getInstance();
-            
             FotoID fotoId = new FotoID();
-            fotoId.setNumero(1);
+            fotoId.setGaleria(em.find(Galeria.class, 2));
+            fotoId.setNumero(2);
             Foto f = new Foto();
             f.setPublicacao(publicacao);
             f.setFotoId(fotoId);
             f.setPublico(true);
             f.setQuantidadeVisualizacoes(15000);
-            f.setTitulo("Eu e meus pais");
-            f.setEndereco("https://pixabay.com/photo-1092508/");
+            f.setTitulo("Bola Futebol");
+            f.setEndereco("https://pixabay.com/static/uploads/photo/2016/03/18/17/50/football-1265412_960_720.jpg");
             em.getTransaction().begin();
             em.persist(f);
             em.getTransaction().commit();

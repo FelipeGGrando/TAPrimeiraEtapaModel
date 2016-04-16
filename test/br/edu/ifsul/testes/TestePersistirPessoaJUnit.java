@@ -8,6 +8,7 @@ import br.edu.ifsul.modelo.Pessoa;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -45,9 +46,9 @@ public class TestePersistirPessoaJUnit {
     public void teste() {
         boolean exception = false;
         try {
-//            Pessoa amigo = em.find(Pessoa.class, 1);
-//            List<Pessoa> amigos = new ArrayList<>();
-//            amigos.add(amigo);
+            Pessoa amigo = em.find(Pessoa.class, 1);
+            List<Pessoa> amigos = new ArrayList<>();
+            amigos.add(amigo);
             Calendar c = Calendar.getInstance();
             Pessoa p = new Pessoa();
             p.setLogin("FelipeGGrando");
@@ -60,7 +61,7 @@ public class TestePersistirPessoaJUnit {
             p.setNascimento(new GregorianCalendar(1994, Calendar.MARCH, 26));
             p.setPeso(63.00);
             p.setAltura(1.64);
-//            p.setAmigos(amigos);
+            p.setAmigos(amigos);
             em.getTransaction().begin();
             em.persist(p);
             em.getTransaction().commit();

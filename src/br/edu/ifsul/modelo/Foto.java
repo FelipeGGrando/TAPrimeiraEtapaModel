@@ -60,12 +60,12 @@ public class Foto implements Serializable {
     @JoinTable(name = "galeria_fotos",
             joinColumns
             = {
-                @JoinColumn(name = "fotoId.numero", referencedColumnName = "numero", nullable = true),
-                @JoinColumn(name = "fotoId.galeria", referencedColumnName = "galeria", nullable = true)},
-            inverseJoinColumns
-            = @JoinColumn(name = "galeria", referencedColumnName = "id", nullable = true)
+                @JoinColumn(name = "foto_numero", referencedColumnName = "numero", nullable = true),
+                @JoinColumn(name = "foto_galeria", referencedColumnName = "galeria", nullable = true)},
+            inverseJoinColumns = @JoinColumn(name = "galeria", referencedColumnName = "id")
     )
     private List<Galeria> galerias = new ArrayList<>();
+
     @OneToMany(mappedBy = "foto", cascade = CascadeType.ALL, orphanRemoval = true,
             fetch = FetchType.LAZY)
     private List<Comentario> comentarios = new ArrayList<>();
@@ -121,7 +121,7 @@ public class Foto implements Serializable {
     public void setEndereco(String endereco) {
         this.endereco = endereco;
     }
-    
+
     public List<Galeria> getGalerias() {
         return galerias;
     }
@@ -137,7 +137,7 @@ public class Foto implements Serializable {
     public void setComentarios(List<Comentario> comentarios) {
         this.comentarios = comentarios;
     }
-    
+
     @Override
     public int hashCode() {
         int hash = 7;
