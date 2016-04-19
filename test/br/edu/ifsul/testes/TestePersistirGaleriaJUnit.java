@@ -51,12 +51,11 @@ public class TestePersistirGaleriaJUnit {
         boolean exception = false;
         try {
             Galeria g = new Galeria();
-//            List<Foto> fotos = new ArrayList<>();
-//            fotos.add(em.find(Foto.class, 1));
+            List<Foto> fotos = em.createQuery("from Foto").getResultList();
+            g.setFotos(fotos);
             g.setPessoa(em.find(Pessoa.class, 1));
             g.setDescricao("Galeria de fotos sobre futebol 2016");
             g.setTitulo("Futebol 2016");
-//            g.setListaFotos(fotos);
             em.getTransaction().begin();
             em.persist(g);
             em.getTransaction().commit();

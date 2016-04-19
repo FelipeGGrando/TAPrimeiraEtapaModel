@@ -48,7 +48,7 @@ public class Galeria implements Serializable {
     @ManyToOne
     @JoinColumn(name = "pessoa", nullable = false, referencedColumnName = "id")
     private Pessoa pessoa;
-     @ManyToMany
+    @ManyToMany
     @JoinTable(name = "galeria_fotos", 
                     joinColumns = 
                     @JoinColumn(name = "galeria", referencedColumnName = "id"),
@@ -92,14 +92,6 @@ public class Galeria implements Serializable {
 
     public void setPessoa(Pessoa pessoa) {
         this.pessoa = pessoa;
-    }
-
-    public List<Foto> getListaFotos() {
-        return fotos;
-    }
-
-    public void setListaFotos(List<Foto> fotos) {
-        this.fotos = fotos;
     }
 
     @Override

@@ -49,15 +49,15 @@ public class TestePersistirFotoJUnit {
         try {
             Calendar publicacao = Calendar.getInstance();
             FotoID fotoId = new FotoID();
-            fotoId.setGaleria(em.find(Galeria.class, 2));
-            fotoId.setNumero(2);
+            fotoId.setGaleria(em.find(Galeria.class, 1));
+            fotoId.setNumero(3);
             Foto f = new Foto();
             f.setPublicacao(publicacao);
             f.setFotoId(fotoId);
             f.setPublico(true);
             f.setQuantidadeVisualizacoes(15000);
-            f.setTitulo("Bola Futebol");
-            f.setEndereco("https://pixabay.com/static/uploads/photo/2016/03/18/17/50/football-1265412_960_720.jpg");
+            f.setTitulo("Bola Voleibol");
+            f.setEndereco("teste");
             em.getTransaction().begin();
             em.persist(f);
             em.getTransaction().commit();

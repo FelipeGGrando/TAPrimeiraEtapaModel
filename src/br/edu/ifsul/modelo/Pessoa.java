@@ -9,23 +9,16 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -48,7 +41,6 @@ public class Pessoa extends Usuario implements Serializable{
     @Length(max = 50, message = "A cidade não deve ter mais que {max} caracteres...")
     @Column(name = "cidade", length = 50, nullable = false)
     private String cidade;
-    @Past(message = "O nascimento deve ser uma data no passado!")
     @NotNull(message = "A data de nascimento deve ser informada...")
     @Column(name = "nascimento", nullable = false)
     @Temporal(TemporalType.DATE)

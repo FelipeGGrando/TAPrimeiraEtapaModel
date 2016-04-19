@@ -55,14 +55,14 @@ public class Foto implements Serializable {
     @Length(max = 500, message = "O endereço não deve ter mais que {max} caracteres...")
     @Column(name = "endereco", length = 500, nullable = false)
     private String endereco;
-
     @ManyToMany
     @JoinTable(name = "galeria_fotos",
             joinColumns
             = {
-                @JoinColumn(name = "foto_numero", referencedColumnName = "numero", nullable = true),
-                @JoinColumn(name = "foto_galeria", referencedColumnName = "galeria", nullable = true)},
-            inverseJoinColumns = @JoinColumn(name = "galeria", referencedColumnName = "id")
+                @JoinColumn(name = "foto_numero", referencedColumnName = "numero", nullable = false),
+                @JoinColumn(name = "foto_galeria", referencedColumnName = "galeria", nullable = false)},
+            inverseJoinColumns
+            = @JoinColumn(name = "galeria", referencedColumnName = "id")
     )
     private List<Galeria> galerias = new ArrayList<>();
 

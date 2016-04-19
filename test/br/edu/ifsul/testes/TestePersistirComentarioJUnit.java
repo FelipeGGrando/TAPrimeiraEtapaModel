@@ -6,8 +6,11 @@
 package br.edu.ifsul.testes;
 
 import br.edu.ifsul.modelo.Comentario;
+import br.edu.ifsul.modelo.Foto;
+import br.edu.ifsul.modelo.Galeria;
 import br.edu.ifsul.modelo.Pessoa;
 import br.edu.ifsul.modelo.Video;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -47,13 +50,14 @@ public class TestePersistirComentarioJUnit {
         boolean exception = false;
         try {
             Comentario c = new Comentario();
-            Video v = em.find(Video.class, 1);
+            
+            
             Pessoa p = em.find(Pessoa.class, 1);
             Calendar publicacao = Calendar.getInstance();
             c.setPublicacao(publicacao);
             c.setPessoa(p);
-            c.setConteudo("Muito legal esse vídeo cara!");
-            c.setVideo(v);
+            c.setConteudo("Não gostei dessa foto!");
+
             em.getTransaction().begin();
             em.persist(c);
             em.getTransaction().commit();
