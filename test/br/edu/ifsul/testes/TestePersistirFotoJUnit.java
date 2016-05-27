@@ -50,14 +50,8 @@ public class TestePersistirFotoJUnit {
             Calendar publicacao = Calendar.getInstance();
             FotoID fotoId = new FotoID();
             fotoId.setGaleria(em.find(Galeria.class, 1));
-            fotoId.setNumero(3);
-            Foto f = new Foto();
-            f.setPublicacao(publicacao);
-            f.setFotoId(fotoId);
-            f.setPublico(true);
-            f.setQuantidadeVisualizacoes(15000);
-            f.setTitulo("Bola Voleibol");
-            f.setEndereco("teste");
+            fotoId.setNumero(1);
+            Foto f = em.find(Foto.class, fotoId);
             em.getTransaction().begin();
             em.persist(f);
             em.getTransaction().commit();

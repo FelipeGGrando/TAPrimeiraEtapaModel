@@ -47,7 +47,7 @@ public class Comentario implements Serializable{
     @JoinColumn(name = "pessoa", nullable = false, referencedColumnName = "id")
     private Pessoa pessoa;
     @ManyToOne
-    @JoinColumn(name = "foto_id", referencedColumnName = "titulo", nullable = true)    
+   // @JoinColumn(name = "foto_id", referencedColumnName = "titulo", nullable = true)    
     private Foto foto;
     @ManyToOne
     @JoinColumn(name = "video_id", referencedColumnName = "id", nullable = true)    

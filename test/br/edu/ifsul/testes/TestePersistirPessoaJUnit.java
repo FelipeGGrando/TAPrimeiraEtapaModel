@@ -44,15 +44,17 @@ public class TestePersistirPessoaJUnit {
     public void teste() {
         boolean exception = false;
         try {
+            Pessoa amigo = em.find(Pessoa.class, 1);
             Calendar c = Calendar.getInstance();
             Pessoa p = new Pessoa();
-            p.setLogin("FelipeGGrando");
-            p.setSenha("123456");
+            p.getAmigos().add(amigo);
+            p.setLogin("Felipe");
+            p.setSenha("felipe");
             p.setAtivo(true);
             p.setUltimoLogin(c);
-            p.setNome("Felipe Gasparin Grando");
-            p.setDescricao("Cara muito legal e tal...");
-            p.setCidade("Passo Fundo");
+            p.setNome("Felipe Gasparin");
+            p.setDescricao("Cara muito legal tal...");
+            p.setCidade("Marau");
             p.setAltura(1.65);
             p.setPeso(70.00);
             p.setNascimento(new GregorianCalendar(1994, Calendar.MARCH, 26));

@@ -7,6 +7,7 @@ package br.edu.ifsul.testes;
 
 import br.edu.ifsul.modelo.Comentario;
 import br.edu.ifsul.modelo.Foto;
+import br.edu.ifsul.modelo.FotoID;
 import br.edu.ifsul.modelo.Galeria;
 import br.edu.ifsul.modelo.Pessoa;
 import br.edu.ifsul.modelo.Video;
@@ -51,13 +52,18 @@ public class TestePersistirComentarioJUnit {
         try {
             Comentario c = new Comentario();
             
+           // Video v = em.find(Video.class, 1);
+            FotoID idf = new FotoID();
+            idf.setNumero(1);
+            idf.setGaleria(em.find(Galeria.class, 1));
+            Foto f = em.find(Foto.class, idf);
             
             Pessoa p = em.find(Pessoa.class, 1);
             Calendar publicacao = Calendar.getInstance();
             c.setPublicacao(publicacao);
             c.setPessoa(p);
-            c.setConteudo("Não gostei dessa foto!");
-
+            c.setConteudo("Não gostei desse video!");
+            c.setFoto(f);
             em.getTransaction().begin();
             em.persist(c);
             em.getTransaction().commit();
