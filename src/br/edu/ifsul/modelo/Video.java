@@ -63,7 +63,15 @@ public class Video {
     public Video() {
 
     }
+    
+    public void adicionarComentario(Comentario obj) {
+        this.comentarios.add(obj);
+    }
 
+    public void removerComentario(int index) {
+        this.comentarios.remove(index);
+    }
+    
     public Integer getId() {
         return id;
     }
