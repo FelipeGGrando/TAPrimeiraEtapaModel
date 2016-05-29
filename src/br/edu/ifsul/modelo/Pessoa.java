@@ -62,7 +62,14 @@ public class Pessoa extends Usuario implements Serializable{
     public Pessoa() {
         
     }
-
+    public void adicionarAmigo(Pessoa obj){
+        this.amigos.add(obj);
+    }
+    
+    public void removerAmigo(int index){
+        this.amigos.remove(index);
+    }
+    
     public String getNome() {
         return nome;
     }
