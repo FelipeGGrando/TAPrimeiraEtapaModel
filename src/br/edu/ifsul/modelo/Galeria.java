@@ -49,17 +49,26 @@ public class Galeria implements Serializable {
     @JoinColumn(name = "pessoa", nullable = false, referencedColumnName = "id")
     private Pessoa pessoa;
     @ManyToMany
-    @JoinTable(name = "galeria_fotos", 
-                    joinColumns = 
-                    @JoinColumn(name = "galeria", referencedColumnName = "id"),
-                    inverseJoinColumns = 
-		   { @JoinColumn(name = "foto_numero", referencedColumnName = "numero", nullable = true),
-		     @JoinColumn(name = "foto_galeria", referencedColumnName = "galeria", nullable = true) }
-	     )
+    @JoinTable(name = "galeria_fotos",
+            joinColumns
+            = @JoinColumn(name = "galeria", referencedColumnName = "id"),
+            inverseJoinColumns
+            = {
+                @JoinColumn(name = "foto_numero", referencedColumnName = "numero", nullable = true),
+                @JoinColumn(name = "foto_galeria", referencedColumnName = "galeria", nullable = true)}
+    )
     private List<Foto> fotos = new ArrayList<>();
 
     public Galeria() {
 
+    }
+
+    public void adicionarFoto(Foto obj) {
+        this.fotos.add(obj);
+    }
+
+    public void removerFoto(int index) {
+        this.fotos.remove(index);
     }
 
     public Integer getId() {
