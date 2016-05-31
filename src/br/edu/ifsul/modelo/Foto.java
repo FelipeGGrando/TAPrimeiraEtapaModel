@@ -74,6 +74,14 @@ public class Foto implements Serializable {
 
     }
 
+    public void adicionarComentario(Comentario obj) {
+        this.comentarios.add(obj);
+    }
+
+    public void removerComentario(int index) {
+        this.comentarios.remove(index);
+    }
+
     public FotoID getFotoId() {
         return fotoId;
     }
