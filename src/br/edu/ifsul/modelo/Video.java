@@ -5,6 +5,7 @@
  */
 package br.edu.ifsul.modelo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -32,7 +33,7 @@ import org.hibernate.validator.constraints.NotBlank;
  */
 @Entity
 @Table(name = "video")
-public class Video {
+public class Video implements Serializable{
 
     @Id
     @SequenceGenerator(name = "seq_video", sequenceName = "seq_video_id", allocationSize = 1)
