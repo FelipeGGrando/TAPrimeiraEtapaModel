@@ -42,12 +42,12 @@ public class Comentario implements Serializable{
     @Column(name = "publicacao", nullable = false)
     @Temporal(TemporalType.DATE)
     private Calendar publicacao;
-     @NotNull(message = "A pessoa deve ser informada")
+    @NotNull(message = "A pessoa deve ser informada")
     @ManyToOne
     @JoinColumn(name = "pessoa", nullable = false, referencedColumnName = "id")
     private Pessoa pessoa;
     @ManyToOne
-   // @JoinColumn(name = "foto_id", referencedColumnName = "titulo", nullable = true)    
+    @JoinColumn(name = "foto_id", referencedColumnName = "titulo", nullable = true)    
     private Foto foto;
     @ManyToOne
     @JoinColumn(name = "video_id", referencedColumnName = "id", nullable = true)    
