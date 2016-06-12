@@ -129,7 +129,7 @@ public class Pessoa extends Usuario implements Serializable{
 
 
     
-    //EQUALS E HASH CODE ESTÂO NO USUÀRIO
+    //EQUALS E HASH CODE ESTÃO NO USUÀRIO
 
     /**
      * @param amigos the amigos to set
