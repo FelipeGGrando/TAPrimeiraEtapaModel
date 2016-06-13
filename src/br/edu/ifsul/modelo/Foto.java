@@ -69,7 +69,15 @@ public class Foto implements Serializable {
     @OneToMany(mappedBy = "foto", cascade = CascadeType.ALL, orphanRemoval = true,
             fetch = FetchType.LAZY)
     private List<Comentario> comentarios = new ArrayList<>();
+    
+    public void adicionarGaleria(Galeria obj) {
+        this.galerias.add(obj);
+    }
 
+    public void removerGaleria(int index) {
+        this.galerias.remove(index);
+    }
+    
     public Foto() {
 
     }
